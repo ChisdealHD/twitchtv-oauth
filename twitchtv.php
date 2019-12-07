@@ -60,7 +60,7 @@ class TwitchTV {
      * @return string         Access token that is required by Twitch to make authenticated responses on behalf of the user
      */
     function get_access_token($code) {
-        $ch = curl_init($this->base_url . "oauth2/token");
+        $ch = curl_init("https://id.twitch.tv/oauth2/token");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -86,7 +86,7 @@ class TwitchTV {
      */
     function authenticated_user($access_token) {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->base_url);
+        curl_setopt($ch, CURLOPT_URL, $this->base_url."?api_version=5");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: OAuth ' . $access_token
